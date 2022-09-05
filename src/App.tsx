@@ -28,16 +28,13 @@ function App() {
         <div className="text-4xl">Lua ga staking</div>
         <div>
           {isConnected ? (
-            <div className="flex items-center gap-2">
-              <div>{address}</div>
-              <button
-                className="bg-red-400 text-white p-2"
-                onClick={handleLogoutClick}
-                disabled={disconnectLoading}
-              >
-                Disconnect
-              </button>
-            </div>
+            <button
+              className="bg-red-400 text-white p-2"
+              onClick={handleLogoutClick}
+              disabled={disconnectLoading}
+            >
+              Disconnect
+            </button>
           ) : (
             connectors.map((connector) => (
               <button
