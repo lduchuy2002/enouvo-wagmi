@@ -1,32 +1,63 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { Outlet } from 'react-router-dom'
+import { Connector, useAccount, useConnect, useDisconnect } from 'wagmi'
+import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { isConnected, address } = useAccount()
+  const {
+    connect,
+    connectors,
+    isLoading: connectLoading,
+    pendingConnector,
+  } = useConnect({
+    connector: new MetaMaskConnector(),
+  })
+  const { disconnect, isLoading: disconnectLoading } = useDisconnect()
+
+  const handleLoginClick = (connector: Connector) => () => {
+    connect({ connector })
+  }
+
+  const handleLogoutClick = () => {
+    disconnect()
+  }
 
   return (
-    <div className="App">
+    <div className="px-12 pt-6">
+      <div className="flex items-center justify-between mb-8">
+        <div className="text-4xl">Lua ga staking</div>
+        <div>
+          {isConnected ? (
+            <div className="flex items-center gap-2">
+              <div>{address}</div>
+              <button
+                className="bg-red-400 text-white p-2"
+                onClick={handleLogoutClick}
+                disabled={disconnectLoading}
+              >
+                Disconnect
+              </button>
+            </div>
+          ) : (
+            connectors.map((connector) => (
+              <button
+                disabled={!connector.ready}
+                key={connector.id}
+                onClick={handleLoginClick(connector)}
+                className="bg-green-400 text-white p-2"
+              >
+                Connect with {connector.name}
+                {connectLoading &&
+                  pendingConnector?.id === connector.id &&
+                  ' (connecting)'}
+              </button>
+            ))
+          )}
+        </div>
+      </div>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        {!isConnected ? <div>Please connect to continue</div> : <Outlet />}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
   )
 }
