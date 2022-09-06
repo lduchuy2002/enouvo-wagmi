@@ -26,7 +26,7 @@ function App() {
     <div className="px-12 pt-6">
       <div className="flex items-center justify-between mb-8">
         <Link className="text-4xl" to="/">
-          Luaga staking
+          Luaga staking - Đầu tư vào chúng tôi để x1000 giá trị bản thân
         </Link>
         <div>
           {isConnected ? (
