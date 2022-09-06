@@ -13,8 +13,8 @@ export default function Home() {
       <div>
         Balance: {data?.formatted ?? ''} {data?.symbol ?? ''}
       </div>
-      <div>
-        <Link className="bg-green-400 text-white" to="/invest">
+      <div className="mt-4">
+        <Link className="bg-green-400 text-white p-2" to="/invest">
           Go to invest now!
         </Link>
       </div>

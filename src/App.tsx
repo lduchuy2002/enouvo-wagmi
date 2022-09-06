@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import { Connector, useAccount, useConnect, useDisconnect } from 'wagmi'
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 
@@ -25,7 +25,9 @@ function App() {
   return (
     <div className="px-12 pt-6">
       <div className="flex items-center justify-between mb-8">
-        <div className="text-4xl">Luaga staking</div>
+        <Link className="text-4xl" to="/">
+          Luaga staking
+        </Link>
         <div>
           {isConnected ? (
             <button

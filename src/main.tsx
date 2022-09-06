@@ -4,7 +4,7 @@ import App from './App'
 import './index.css'
 import client from './client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Home } from './pages'
+import { Home, Invest } from './pages'
 import { WagmiConfig } from 'wagmi'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
@@ -14,6 +14,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<Home />} />
+            <Route path="invest" element={<Invest />} />
           </Route>
         </Routes>
       </BrowserRouter>
