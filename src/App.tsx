@@ -3,7 +3,7 @@ import { Connector, useAccount, useConnect, useDisconnect } from 'wagmi'
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 
 function App() {
-  const { isConnected, address } = useAccount()
+  const { isConnected } = useAccount()
   const {
     connect,
     connectors,
@@ -25,7 +25,7 @@ function App() {
   return (
     <div className="px-12 pt-6">
       <div className="flex items-center justify-between mb-8">
-        <div className="text-4xl">Lua ga staking</div>
+        <div className="text-4xl">Luaga staking</div>
         <div>
           {isConnected ? (
             <button
