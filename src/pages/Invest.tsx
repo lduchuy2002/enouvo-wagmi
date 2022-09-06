@@ -1,5 +1,4 @@
-import { BigNumber } from 'ethers'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useAccount, useContractRead } from 'wagmi'
 import config from '../config/config'
 import stakingAbi from '../contracts/staking-abi.json'
@@ -15,9 +14,9 @@ export default function Invest() {
     contractInterface: stakingAbi,
     functionName: 'getDepositInfo',
     args: [address],
-    onSuccess: ({ _stake, _rewards }) => {
-      setStake(_stake.toNumber())
-      setRewards(_rewards.toNumber())
+    onSuccess: ([stake, rewards]) => {
+      setStake(stake.toNumber())
+      setRewards(rewards.toNumber())
     },
   })
 
