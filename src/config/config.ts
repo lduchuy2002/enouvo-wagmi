@@ -1,3 +1,3 @@
 export default {
-  stakingAddress: '0xc7601c25086f6bc600f8f613512862098be8fbcc',
+  erc20Address: '0xe3316E20A976bD675E7eB5243Ed380A74212A444',
 }

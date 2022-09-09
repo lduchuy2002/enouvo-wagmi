@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App'
-import './index.css'
-import client from './client'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Home, Invest } from './pages'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { WagmiConfig } from 'wagmi'
+import App from './App'
+import client from './client'
+import './index.css'
+import { Home } from './pages'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -14,7 +14,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<Home />} />
-            <Route path="invest" element={<Invest />} />
           </Route>
         </Routes>
       </BrowserRouter>

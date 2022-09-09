@@ -1,9 +1,9 @@
-import { Link, Outlet } from 'react-router-dom'
-import { Connector, useAccount, useConnect, useDisconnect } from 'wagmi'
-import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
+import { Link, Outlet } from "react-router-dom";
+import { Connector, useAccount, useConnect, useDisconnect } from "wagmi";
+import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 
 function App() {
-  const { isConnected } = useAccount()
+  const { isConnected } = useAccount();
   const {
     connect,
     connectors,
@@ -11,16 +11,16 @@ function App() {
     pendingConnector,
   } = useConnect({
     connector: new MetaMaskConnector(),
-  })
-  const { disconnect, isLoading: disconnectLoading } = useDisconnect()
+  });
+  const { disconnect, isLoading: disconnectLoading } = useDisconnect();
 
   const handleLoginClick = (connector: Connector) => () => {
-    connect({ connector })
-  }
+    connect({ connector });
+  };
 
   const handleLogoutClick = () => {
-    disconnect()
-  }
+    disconnect();
+  };
 
   return (
     <div className="px-12 pt-6">
@@ -48,7 +48,7 @@ function App() {
                 Connect with {connector.name}
                 {connectLoading &&
                   pendingConnector?.id === connector.id &&
-                  ' (connecting)'}
+                  " (connecting)"}
               </button>
             ))
           )}
@@ -58,7 +58,7 @@ function App() {
         {!isConnected ? <div>Please connect to continue</div> : <Outlet />}
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

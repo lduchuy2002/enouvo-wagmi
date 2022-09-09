@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom'
 import { useAccount, useBalance } from 'wagmi'
+import BalanceOf from '../components/BalanceOf'
+import Transfer from '../components/Transfer'
 
 export default function Home() {
   const { address } = useAccount()
@@ -11,13 +12,10 @@ export default function Home() {
     <div>
       <div>Your address: {address}</div>
       <div>
-        Balance: {data?.formatted ?? ''} {data?.symbol ?? ''}
+        Your balance: {data?.formatted ?? ''} {data?.symbol ?? ''}
       </div>
-      <div className="mt-4">
-        <Link className="bg-green-400 text-white p-2" to="/invest">
-          Go to invest now!
-        </Link>
-      </div>
+      <BalanceOf />
+      <Transfer />
     </div>
   )
 }
