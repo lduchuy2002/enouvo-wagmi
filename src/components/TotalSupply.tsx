@@ -3,15 +3,13 @@ import { useContractRead } from 'wagmi'
 import config from '../config/config'
 import erc20ABI from '../contracts/erc20_abi.json'
 
-export default function BalanceOf() {
-  const [tokenOwner, setTokenOwner] = useState<string>('')
+export default function TotalSupply() {
   const [response, setResponse] = useState<string>('')
 
   const { data } = useContractRead({
     addressOrName: config.erc20Address,
     contractInterface: erc20ABI,
-    functionName: 'balanceOf',
-    args: [tokenOwner],
+    functionName: 'totalSupply',
   })
 
   const handleButtonClick = () => {
@@ -24,15 +22,8 @@ export default function BalanceOf() {
         onClick={handleButtonClick}
         className="bg-green-400 text-white p-2"
       >
-        Balance of:
+        Total supply:
       </button>
-      <input
-        type="text"
-        value={tokenOwner}
-        onChange={(e) => setTokenOwner(e.target.value)}
-        className=" border-2 p-2"
-        placeholder="address"
-      />
       {response && <div>{response} EVA</div>}
     </div>
   )

@@ -1,0 +1,6 @@
+export { default as Allowance } from './Allowance'
+export { default as Approve } from './Approve'
+export { default as BalanceOf } from './BalanceOf'
+export { default as TotalSupply } from './TotalSupply'
+export { default as Transfer } from './Transfer'
+export { default as TransferFrom } from './TransferFrom'
