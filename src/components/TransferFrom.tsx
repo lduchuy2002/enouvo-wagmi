@@ -3,7 +3,8 @@ import { useContractWrite, usePrepareContractWrite } from 'wagmi'
 import config from '../config/config'
 import erc20ABI from '../contracts/erc20_abi.json'
 
-export default function Transfer() {
+export default function TransferFrom() {
+  const [from, setFrom] = useState<string>('')
   const [to, setTo] = useState<string>('')
   const [amount, setAmount] = useState<string>('')
 
@@ -11,7 +12,7 @@ export default function Transfer() {
     addressOrName: config.erc20Address,
     contractInterface: erc20ABI,
     functionName: 'transfer',
-    args: [to, amount],
+    args: [from, to, amount],
     overrides: {
       gasLimit: '10000000',
     },
@@ -33,15 +34,22 @@ export default function Transfer() {
         onClick={handleButtonClick}
         className="bg-green-400 text-white p-2"
       >
-        Transfer:
+        Transfer from:
       </button>
       <div className="flex flex-col">
         <input
           type="text"
-          value={to}
+          value={from}
+          onChange={(e) => setFrom(e.target.value)}
+          className=" border-2 p-2"
+          placeholder="from"
+        />
+        <input
+          type="text"
+          value={from}
           onChange={(e) => setTo(e.target.value)}
           className=" border-2 p-2"
-          placeholder="address"
+          placeholder="to"
         />
         <input
           type="text"

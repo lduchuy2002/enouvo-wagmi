@@ -3,28 +3,28 @@ import { useContractWrite, usePrepareContractWrite } from 'wagmi'
 import config from '../config/config'
 import erc20ABI from '../contracts/erc20_abi.json'
 
-export default function Transfer() {
-  const [to, setTo] = useState<string>('')
+export default function Approve() {
+  const [spender, setSpender] = useState<string>('')
   const [amount, setAmount] = useState<string>('')
 
   const { config: configWriteMethod } = usePrepareContractWrite({
     addressOrName: config.erc20Address,
     contractInterface: erc20ABI,
-    functionName: 'transfer',
-    args: [to, amount],
+    functionName: 'approve',
+    args: [spender, amount],
     overrides: {
       gasLimit: '10000000',
     },
   })
 
-  const { data, write: transfer } = useContractWrite(configWriteMethod)
+  const { data, write: approve } = useContractWrite(configWriteMethod)
 
   const handleButtonClick = () => {
-    if (!transfer) {
+    if (!approve) {
       return
     }
 
-    transfer()
+    approve()
   }
 
   return (
@@ -33,15 +33,15 @@ export default function Transfer() {
         onClick={handleButtonClick}
         className="bg-green-400 text-white p-2"
       >
-        Transfer:
+        Approve:
       </button>
       <div className="flex flex-col">
         <input
           type="text"
-          value={to}
-          onChange={(e) => setTo(e.target.value)}
+          value={spender}
+          onChange={(e) => setSpender(e.target.value)}
           className=" border-2 p-2"
-          placeholder="address"
+          placeholder="spender"
         />
         <input
           type="text"
@@ -53,7 +53,7 @@ export default function Transfer() {
       </div>
       {data && (
         <div>
-          Transfer successfully, check the transaction{' '}
+          Approve successfully, check the transaction{' '}
           <a
             href={`https://goerli.etherscan.io/tx/${data.hash}`}
             className="text-blue-400"
